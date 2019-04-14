@@ -30,8 +30,38 @@ resource "tfe_variable" "compute-base-vm_vm-name-prefix" {
   value    = "${var.vm-name-prefix}"
   category = "terraform"
   workspace_id = "${tfe_workspace.compute-base-vm.id}"
+}
 
+resource "tfe_variable" "compute-base-vm_disk_size" {
+  key      = "disk_size"
+  value    = "${var.disk_size}"
+  category = "terraform"
+  workspace_id = "${tfe_workspace.compute-base-vm.id}"
+}
 
+resource "tfe_variable" "compute-base-guest_id" {
+  key      = "guest_id"
+  value    = "${var.guest_id}"
+  category = "terraform"
+  workspace_id = "${tfe_workspace.compute-base-vm.id}"
+}
+resource "tfe_variable" "compute-base-memory" {
+  key      = "memory"
+  value    = "${var.memory}"
+  category = "terraform"
+  workspace_id = "${tfe_workspace.compute-base-vm.id}"
+}
+resource "tfe_variable" "compute-base-vm_count" {
+  key      = "vm_count"
+  value    = "${var.vm_count}"
+  category = "terraform"
+  workspace_id = "${tfe_workspace.compute-base-vm.id}"
+}
+resource "tfe_variable" "compute-base-wait_for_guest_net_timeout" {
+  key      = "wait_for_guest_net_timeout"
+  value    = "${var.wait_for_guest_net_timeout}"
+  category = "terraform"
+  workspace_id = "${tfe_workspace.compute-base-vm.id}"
 }
 
 # ENV VARIABLES
