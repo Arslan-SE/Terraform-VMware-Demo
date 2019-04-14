@@ -20,7 +20,7 @@ provider "tfe" {
 
 # TAGS WORKSPACE - Standardize and manage tags accross multiple vCenters.
 resource "tfe_workspace" "tags" {
-  name              = "tags"
+  name              = "Tags"
   organization      = "${var.org}"
   working_directory = "${var.tags_working_directory}"
 
