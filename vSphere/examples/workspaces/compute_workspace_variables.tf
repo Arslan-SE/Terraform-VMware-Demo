@@ -2,7 +2,7 @@
 
 # TERRAFORM VARIABLES
 resource "tfe_variable" "compute-base-vm_dc" {
-  key      = "datacenter"
+  key      = "dc"
   value    = "${var.dc}"
   category = "terraform"
   workspace_id = "${tfe_workspace.compute-base-vm.id}"
@@ -35,6 +35,13 @@ resource "tfe_variable" "compute-base-vm_vm-name-prefix" {
 }
 
 # ENV VARIABLES
+resource "tfe_variable" "compute_VSPHERE_USER" {
+  key          = "VSPHERE_USER"
+  value        = "${var.VSPHERE_USER}"
+  category     = "env"
+  sensitive    = "true"
+  workspace_id = "${tfe_workspace.compute-base-vm.id}"
+}
 resource "tfe_variable" "compute_VSPHERE_PASSWORD" {
   key          = "VSPHERE_PASSWORD"
   value        = "${var.VSPHERE_PASSWORD}"
