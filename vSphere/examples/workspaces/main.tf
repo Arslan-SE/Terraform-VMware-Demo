@@ -1,6 +1,12 @@
 # Do not use Terraform 0.12 or greater until the vSphere provider is released for it. 
 terraform {
-  required_version = "<= 0.11.13"
+    backend "remote" {
+    organization = "VMware-Demo"
+    hostname = "ptfe.this-demo.rocks"
+    workspaces {
+      name = "Workspace-Manager"
+    }
+  }
 }
 
 # TERRAFORM ENTERPRISE PROVIDER 

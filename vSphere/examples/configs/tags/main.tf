@@ -1,4 +1,6 @@
-
+terraform {
+  required_version = "= 0.11.13"
+}
 // Environment Category
 resource "vsphere_tag_category" "environment" {
   name        = "Environment"
