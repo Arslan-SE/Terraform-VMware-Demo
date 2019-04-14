@@ -1,23 +1,23 @@
 # These are the variables created for the Tags Workspace.
 
 # TERRAFORM VARIABLES
-resource "tfe_variable" "dc" {
-  key          = "Datacenter_Name"
+resource "tfe_variable" "network-dc" {
+  key          = "dc"
   value        = "${var.dc}"
   category     = "terraform"
   sensitive    = "false"
   workspace_id = "${tfe_workspace.network.id}"
 }
-resource "tfe_variable" "host" {
-  key          = "Host_Name"
+resource "tfe_variable" "network-host" {
+  key          = "host"
   value        = "${var.host}"
   category     = "terraform"
   sensitive    = "false"
   workspace_id = "${tfe_workspace.network.id}"
 }
-resource "tfe_variable" "vswitch_name" {
-  key          = "vSwitch_Name"
-  value        = "${var.vswitch_name}"
+resource "tfe_variable" "network-network" {
+  key          = "network"
+  value        = "${var.network}"
   category     = "terraform"
   sensitive    = "false"
   workspace_id = "${tfe_workspace.network.id}"

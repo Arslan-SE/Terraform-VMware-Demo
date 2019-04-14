@@ -41,3 +41,15 @@ resource "tfe_workspace" "network" {
     oauth_token_id = "${var.tfe_oauth_token}"
   }
 }
+
+# BASE-VM WORKSPACE - Deploy your vSwitches and Portgroups to be consumed by services.
+resource "tfe_workspace" "compute-base-vm" {
+  name              = "Base-VM"
+  organization      = "${var.org}"
+  working_directory = "${var.compute-base-vm_working_directory}"
+
+  vcs_repo = {
+    identifier     = "${var.vcs_repo_identifier}"
+    oauth_token_id = "${var.tfe_oauth_token}"
+  }
+}
