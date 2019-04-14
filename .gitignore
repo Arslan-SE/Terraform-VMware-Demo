@@ -2,6 +2,7 @@
 *.tfstate
 *.tfstate.backup
 *.tfvars
+*.auto.tfvars
 
 #Module files
 .terraform/
