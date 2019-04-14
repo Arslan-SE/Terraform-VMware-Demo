@@ -1,4 +1,6 @@
 # SETUP
-variable "Datacenter_Name"  {}
-variable "Host_Name" {}
-variable "vSwitch_Name" {}
+variable "dc"  {}
+variable "datastore" {}
+variable "network" {}
+variable "resource_pool" {}
+variable "vm_name_prefix" {}

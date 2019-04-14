@@ -1,4 +1,4 @@
 # SETUP
-variable "Datacenter_Name"  {}
-variable "Host_Name" {}
-variable "vSwitch_Name" {}
+variable "dc"  {}
+variable "host" {}
+variable "network" {}
