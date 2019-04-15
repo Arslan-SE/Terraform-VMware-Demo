@@ -1,0 +1,56 @@
+#!/bin/bash
+
+ORG="CUSTOMER"
+PREFIX="PROJECT-A"
+APP="SAP"
+ENV="DEV"
+#WS="$ORG/$APP"
+WS="$ORG/$NM-$APP-$ENV"
+
+# EXPORT LOCAL ENV VARS
+export TFE_TOKEN="O0x5mAyfn80ezw.atlasv1.zps4jx3is3NFbAFVgsjPlv93hVTjAOcj9cwpFvfSsGB4QuRPOAKiKiWGYylbr5T1jMY"
+export TFE_ADDR="https://ptfe.this-demo.rocks"
+export TFE_WORKSPACE=$WS
+
+# CREATE NEW WORKSPACE
+tfe workspace new -name $WS -tfe-address ${TFE_ADDR}
+
+# CREATE ENV VARS IN WORKSPACE
+tfe pushvars -name $WS -senv-var 'VSPHERE_USER=administrator@vsphere.local' -tfe-address ${TFE_ADDR}
+tfe pushvars -name $WS -senv-var 'VSPHERE_PASSWORD=Hashi123!' -tfe-address ${TFE_ADDR}
+tfe pushvars -name $WS -senv-var 'VSPHERE_SERVER=10.100.0.3' -tfe-address ${TFE_ADDR}
+tfe pushvars -name $WS -senv-var 'VSPHERE_ALLOW_UNVERIFIED_SSL=true' -tfe-address ${TFE_ADDR}
+
+# CREATE TERRAFORM VARS IN WORKSPACE
+tfe pushvars -name $WS -var 'instances=1' -tfe-address ${TFE_ADDR}
+tfe pushvars -name $WS -var 'environment=$ENV' -tfe-address ${TFE_ADDR}
+tfe pushvars -name $WS -var 'vmname=App' -tfe-address ${TFE_ADDR}
+tfe pushvars -name $WS -var 'vmdomain=vsphere.local' -tfe-address ${TFE_ADDR}
+tfe pushvars -name $WS -var 'cpu_number=2' -tfe-address ${TFE_ADDR}
+tfe pushvars -name $WS -var 'ram_size=2048' -tfe-address ${TFE_ADDR}
+tfe pushvars -name $WS -var 'vmtemplate=UbuntuTemplate' -tfe-address ${TFE_ADDR}
+tfe pushvars -name $WS -var 'dc=PacketDatacenter' -tfe-address ${TFE_ADDR}
+tfe pushvars -name $WS -var 'cluster=MainCluster' -tfe-address ${TFE_ADDR}
+tfe pushvars -name $WS -var 'vmfolder=$Prefix' -tfe-address ${TFE_ADDR}
+tfe pushvars -name $WS -var 'datastore=datastore1' -tfe-address ${TFE_ADDR}
+tfe pushvars -name $WS -var 'vnet=VM Network' -tfe-address ${TFE_ADDR}
+tfe pushvars -name $WS -var 'ipv4submask=24' -tfe-address ${TFE_ADDR}
+tfe pushvars -name $WS -hcl-var 'ipaddress=["10.100.0.207"]' -tfe-address ${TFE_ADDR}
+tfe pushvars -name $WS -hcl-var 'vmdns=["8.8.8.8","1.1.1.1"]' -tfe-address ${TFE_ADDR}
+ tfe pushvars -name $WS -var 'vmgateway=10.100.0.1' -tfe-address ${TFE_ADDR}
+tfe pushvars -name $WS -var 'os_disk_size_gb=16' -tfe-address ${TFE_ADDR}
+tfe pushvars -name $WS -var 'data_disk_size_gb=16' -tfe-address ${TFE_ADDR}
+tfe pushvars -name $WS -var 'label=disk1' -tfe-address ${TFE_ADDR}
+tfe pushvars -name $WS -var 'tagCategory=Customer' -tfe-address ${TFE_ADDR}
+tfe pushvars -name $WS -var 'tag=TEST' -tfe-address ${TFE_ADDR}
+tfe pushvars -name $WS -var 'attribute=fromTerraform' -tfe-address ${TFE_ADDR}
+tfe pushvars -name $WS -var 'attributeValue=Yes' -tfe-address ${TFE_ADDR}
+
+
+
+
+
+
+
+
+
