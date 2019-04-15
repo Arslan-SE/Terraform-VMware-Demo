@@ -1,4 +1,14 @@
-# These are the variables created for the Tags Workspace.
+# NETWORK WORKSPACE - Deploy your vSwitches and Portgroups to be consumed by services.
+resource "tfe_workspace" "network" {
+  name              = "Networks"
+  organization      = "${var.org}"
+  working_directory = "${var.network_working_directory}"
+
+  vcs_repo = {
+    identifier     = "${var.vcs_repo_identifier}"
+    oauth_token_id = "${var.tfe_oauth_token}"
+  }
+}
 
 # TERRAFORM VARIABLES
 resource "tfe_variable" "network-dc" {

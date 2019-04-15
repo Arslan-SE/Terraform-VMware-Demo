@@ -27,4 +27,8 @@ variable "host" {}
 variable "datastore" {}
 variable "network" {}
 variable "vm-name-prefix" {}
-
+variable "wait_for_guest_net_timeout" {}
+variable "memory" {}
+variable "disk_size" {}
+variable "vm_count" {}
+variable "guest_id" {}

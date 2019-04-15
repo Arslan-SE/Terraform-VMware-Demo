@@ -1,3 +1,15 @@
+# TERRAFORM ENTERPRISE PROVIDER 
+provider "tfe" {
+  hostname = "${var.hostname}"
+  token    = "${var.tfe_user_token}"
+}
+provider "vsphere" {
+  user           = "${var.VSPHERE_USER}"
+  password       = "${var.VSPHERE_PASSWORD}"
+  vsphere_server = "${var.VSPHERE_SERVER}"
+  # If you have a self-signed cert
+  allow_unverified_ssl = "${var.VSPHERE_ALLOW_UNVERIFIED_SSL}"
+}
 # Do not use Terraform 0.12 or greater until the vSphere provider is released for it. 
 terraform {
     backend "remote" {
@@ -8,48 +20,53 @@ terraform {
     }
   }
 }
-
-# TERRAFORM ENTERPRISE PROVIDER 
-provider "tfe" {
-  hostname = "${var.hostname}"
-  token    = "${var.tfe_user_token}"
+# DATASOURCES
+data "tfe_workspace" "this" {
+  name         = "Workspace-Manager"
+  organization = "VMware-Demo"
 }
-###########################
-###### ALL WORKSPACES #####
-###########################
-
-# TAGS WORKSPACE - Standardize and manage tags accross multiple vCenters.
-resource "tfe_workspace" "tags" {
-  name              = "Tags"
-  organization      = "${var.org}"
-  working_directory = "${var.tags_working_directory}"
-
-  vcs_repo = {
-    identifier     = "${var.vcs_repo_identifier}"
-    oauth_token_id = "${var.tfe_oauth_token}"
-  }
+data "vsphere_datacenter" "dc" {
+  name = "${var.dc}"
 }
 
-# NETWORK WORKSPACE - Deploy your vSwitches and Portgroups to be consumed by services.
-resource "tfe_workspace" "network" {
-  name              = "Networks"
-  organization      = "${var.org}"
-  working_directory = "${var.network_working_directory}"
-
-  vcs_repo = {
-    identifier     = "${var.vcs_repo_identifier}"
-    oauth_token_id = "${var.tfe_oauth_token}"
-  }
+// The cluster's id (When you are not deploying to a resource pool or it doesn't exist)
+data "vsphere_compute_cluster" "cluster" {
+  name          = "${var.resource_pool}"
+  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+}
+# ENV VARIABLES
+resource "tfe_variable" "this_VSPHERE_USER" {
+  key          = "VSPHERE_USER"
+  value        = "${var.VSPHERE_USER}"
+  category     = "env"
+  sensitive    = "true"
+  workspace_id = "${data.tfe_workspace.this.id}"
+}
+resource "tfe_variable" "this_VSPHERE_PASSWORD" {
+  key          = "VSPHERE_PASSWORD"
+  value        = "${var.VSPHERE_PASSWORD}"
+  category     = "env"
+  sensitive    = "true"
+  workspace_id = "${data.tfe_workspace.this.id}"
+}
+resource "tfe_variable" "this_VSPHERE_SERVER" {
+  key          = "VSPHERE_SERVER"
+  value        = "${var.VSPHERE_SERVER}"
+  category     = "env"
+  sensitive    = "true"
+  workspace_id = "${data.tfe_workspace.this.id}"
+}
+resource "tfe_variable" "this_VSPHERE_ALLOW_UNVERIFIED_SSL" {
+  key          = "VSPHERE_ALLOW_UNVERIFIED_SSL"
+  value        = "${var.VSPHERE_ALLOW_UNVERIFIED_SSL}"
+  category     = "env"
+  sensitive    = "true"
+  workspace_id = "${data.tfe_workspace.this.id}"
+}
+resource "tfe_variable" "this_confirm_destroy" {
+  key          = "CONFIRM_DESTROY"
+  value        = "1"
+  category     = "env"
+  workspace_id = "${data.tfe_workspace.this.id}"
 }
 
-# BASE-VM WORKSPACE - Deploy your vSwitches and Portgroups to be consumed by services.
-resource "tfe_workspace" "compute-base-vm" {
-  name              = "Base-VM"
-  organization      = "${var.org}"
-  working_directory = "${var.compute-base-vm_working_directory}"
-
-  vcs_repo = {
-    identifier     = "${var.vcs_repo_identifier}"
-    oauth_token_id = "${var.tfe_oauth_token}"
-  }
-}

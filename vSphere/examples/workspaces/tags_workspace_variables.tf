@@ -1,4 +1,14 @@
-# These are the variables created for the Tags Workspace.
+# TAGS WORKSPACE - Standardize and manage tags accross multiple vCenters.
+resource "tfe_workspace" "tags" {
+  name              = "Tags"
+  organization      = "${var.org}"
+  working_directory = "${var.tags_working_directory}"
+
+  vcs_repo = {
+    identifier     = "${var.vcs_repo_identifier}"
+    oauth_token_id = "${var.tfe_oauth_token}"
+  }
+}
 
 # TERRAFORM VARIABLES
 # -----None----

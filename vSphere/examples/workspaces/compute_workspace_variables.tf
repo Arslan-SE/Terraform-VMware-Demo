@@ -1,4 +1,14 @@
-# These are the variables created for the Tags Workspace.
+# BASE-VM WORKSPACE - Deploy your vSwitches and Portgroups to be consumed by services.
+resource "tfe_workspace" "compute-base-vm" {
+  name              = "Base-VM"
+  organization      = "${var.org}"
+  working_directory = "${var.compute-base-vm_working_directory}"
+
+  vcs_repo = {
+    identifier     = "${var.vcs_repo_identifier}"
+    oauth_token_id = "${var.tfe_oauth_token}"
+  }
+}
 
 # TERRAFORM VARIABLES
 resource "tfe_variable" "compute-base-vm_dc" {
@@ -21,7 +31,7 @@ resource "tfe_variable" "compute-base-vm_network" {
 }
 resource "tfe_variable" "compute-base-vm_resource_pool" {
   key      = "resource_pool"
-  value    = "${var.resource_pool}"
+  value    = "${data.vsphere_compute_cluster.cluster.resource_pool_id}"
   category = "terraform"
   workspace_id = "${tfe_workspace.compute-base-vm.id}"
 }
