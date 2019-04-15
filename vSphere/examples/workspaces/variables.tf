@@ -26,6 +26,7 @@ variable "resource_pool" {}
 variable "host" {}
 variable "datastore" {}
 variable "network" {}
+variable "vswitch" {}
 variable "vm-name-prefix" {}
 variable "wait_for_guest_net_timeout" {}
 variable "memory" {}

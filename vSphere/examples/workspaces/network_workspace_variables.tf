@@ -27,7 +27,7 @@ resource "tfe_variable" "network-host" {
 }
 resource "tfe_variable" "network-network" {
   key          = "network"
-  value        = "${var.network}"
+  value        = "${var.vswitch}"
   category     = "terraform"
   sensitive    = "false"
   workspace_id = "${tfe_workspace.network.id}"

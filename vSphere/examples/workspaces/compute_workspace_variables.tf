@@ -31,7 +31,7 @@ resource "tfe_variable" "compute-base-vm_network" {
 }
 resource "tfe_variable" "compute-base-vm_resource_pool" {
   key      = "resource_pool"
-  value    = "${data.vsphere_compute_cluster.cluster.resource_pool_id}"
+  value    = "${var.resource_pool}"
   category = "terraform"
   workspace_id = "${tfe_workspace.compute-base-vm.id}"
 }

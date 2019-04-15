@@ -3,13 +3,7 @@ provider "tfe" {
   hostname = "${var.hostname}"
   token    = "${var.tfe_user_token}"
 }
-provider "vsphere" {
-  user           = "${var.VSPHERE_USER}"
-  password       = "${var.VSPHERE_PASSWORD}"
-  vsphere_server = "${var.VSPHERE_SERVER}"
-  # If you have a self-signed cert
-  allow_unverified_ssl = "${var.VSPHERE_ALLOW_UNVERIFIED_SSL}"
-}
+
 # Do not use Terraform 0.12 or greater until the vSphere provider is released for it. 
 terraform {
     backend "remote" {
@@ -20,6 +14,16 @@ terraform {
     }
   }
 }
+
+/*
+
+provider "vsphere" {
+  user           = "${var.VSPHERE_USER}"
+  password       = "${var.VSPHERE_PASSWORD}"
+  vsphere_server = "${var.VSPHERE_SERVER}"
+  # If you have a self-signed cert
+  allow_unverified_ssl = "${var.VSPHERE_ALLOW_UNVERIFIED_SSL}"
+}
 # DATASOURCES
 data "tfe_workspace" "this" {
   name         = "Workspace-Manager"
@@ -28,7 +32,6 @@ data "tfe_workspace" "this" {
 data "vsphere_datacenter" "dc" {
   name = "${var.dc}"
 }
-
 // The cluster's id (When you are not deploying to a resource pool or it doesn't exist)
 data "vsphere_compute_cluster" "cluster" {
   name          = "${var.resource_pool}"
@@ -69,4 +72,4 @@ resource "tfe_variable" "this_confirm_destroy" {
   category     = "env"
   workspace_id = "${data.tfe_workspace.this.id}"
 }
-
+*/
