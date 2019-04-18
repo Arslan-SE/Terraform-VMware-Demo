@@ -11,7 +11,7 @@ module "vm" {
   ds_cluster = "DatastoreCluster"
   instances = 1
   ipaddress = ["10.100.0.223"]
-  ipv4submask = "255.255.255.0"
+  ipv4submask = "24"
   is_windows_image = "true"
   ram_size = 8
   vlan = "VM Network"
