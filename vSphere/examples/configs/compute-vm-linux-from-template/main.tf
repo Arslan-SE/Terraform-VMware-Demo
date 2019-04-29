@@ -14,6 +14,9 @@ module "virtual_machines" {
   vm_count                   = "${var.vm_count}"
   vm_name_prefix             = "${var.vm_name_prefix}"
   wait_for_guest_net_timeout = "${var.wait_for_guest_net_timeout}"
+  ipv4_gateway               = "${var.vmgateway}"
+  ipv4_network_address        = "${var.ipaddress}"
+  dns_servers                 = ["${var.vmdns}"]
 }
 
 output "virtual_machine_names" {

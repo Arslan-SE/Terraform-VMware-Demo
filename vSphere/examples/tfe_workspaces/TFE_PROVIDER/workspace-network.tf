@@ -3,7 +3,7 @@ resource "tfe_workspace" "network" {
   name              = "Networks"
   organization      = "${var.org}"
   working_directory = "${var.network_working_directory}"
-
+ auto_apply        = true
   vcs_repo = {
     identifier     = "${var.vcs_repo_identifier}"
     oauth_token_id = "${var.tfe_oauth_token}"

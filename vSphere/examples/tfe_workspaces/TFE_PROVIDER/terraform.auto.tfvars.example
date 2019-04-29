@@ -1,0 +1,40 @@
+vm-name-prefix = "Project_A-" // Create a unique one to make it easier to track in vCenter.
+
+# TFE PROVIDER
+hostname = "ptfe.this-demo.rocks"
+org = "<ORG_NAME>"
+tfe_oauth_token = "<OAUTH_TOKEN>" // Example: ot-gN2RLWizFtVje6as
+tfe_user_token = "<USER_TOKEN>"
+tfe_org_token = "<ORG_TOKEN>"
+
+# VSPHERE PROVIDER
+VSPHERE_ALLOW_UNVERIFIED_SSL = true
+VSPHERE_USER = "administrator@vsphere.local"
+VSPHERE_PASSWORD = "Hashi123!"
+VSPHERE_SERVER = "10.100.0.3"
+
+# GITHUB REPO
+vcs_repo_identifier = "<REPO_PATH>" //Example: Arslan-SE/Terraform-VMware-Demo
+
+# DIRECTORIES LINKED TO WORKSPACES
+tags_working_directory ="vSphere/examples/configs/tags"
+network_working_directory ="vSphere/examples/configs/network"
+compute-base-vm_working_directory ="vSphere/examples/configs/compute-vm-shell"
+compute-linux_working_directory ="vSphere/examples/configs/compute-vm-linux-from-template"
+
+# VSPHERE VARS
+dc = "PacketDatacenter"
+resource_pool = "MainCluster/Resources"
+host = "10.100.0.2"
+datastore = "datastore1"
+network = "DEMO-VM_Network" // Use this unless you provision other portgroups with the network workspace.
+vswitch = "vSwitch0"
+guest_id = "otherLinuxGuest"
+wait_for_guest_net_timeout = "0"
+memory = "4"
+vm_count = "1" 
+disk_size = "10"
+vmtemplate = "UbuntuTemplate"
+ipaddress = "10.100.0.x" // Use an unused IP address, no automated solution for this.
+vmgateway = "10.100.0.1"
+vmdns = "8.8.8.8"

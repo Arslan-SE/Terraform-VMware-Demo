@@ -3,7 +3,7 @@ resource "tfe_workspace" "compute-linux" {
   name              = "Linux-From-Template"
   organization      = "${var.org}"
   working_directory = "${var.compute-linux_working_directory}"
-
+   auto_apply        = true
   vcs_repo = {
     identifier     = "${var.vcs_repo_identifier}"
     oauth_token_id = "${var.tfe_oauth_token}"
@@ -20,12 +20,6 @@ resource "tfe_variable" "compute-linux_dc" {
 resource "tfe_variable" "compute-linux_datastore" {
   key      = "datastore"
   value    = "${var.datastore}"
-  category = "terraform"
-  workspace_id = "${tfe_workspace.compute-linux.id}"
-}
-resource "tfe_variable" "compute-linux_network" {
-  key      = "network"
-  value    = "${var.network}"
   category = "terraform"
   workspace_id = "${tfe_workspace.compute-linux.id}"
 }
@@ -71,6 +65,35 @@ resource "tfe_variable" "compute-linux-wait_for_guest_net_timeout" {
   key      = "wait_for_guest_net_timeout"
   value    = "${var.wait_for_guest_net_timeout}"
   category = "terraform"
+  workspace_id = "${tfe_workspace.compute-linux.id}"
+}
+
+# NETWORK
+resource "tfe_variable" "compute-linux_network" {
+  key      = "network"
+  value    = "${var.network}"
+  category = "terraform"
+  workspace_id = "${tfe_workspace.compute-linux.id}"
+}
+resource "tfe_variable" "compute-linux-ipv4" {
+  key      = "ipv4_network_address"
+  value    = "${var.ipaddress}"
+  category = "terraform"
+  workspace_id = "${tfe_workspace.compute-linux.id}"
+}
+
+resource "tfe_variable" "compute-linux-gateway" {
+  key      = "ipv4_gateway"
+  value    = "${var.vmgateway}"
+  category = "terraform"
+  workspace_id = "${tfe_workspace.compute-linux.id}"
+}
+
+resource "tfe_variable" "compute-linux-dns" {
+  key      = "dns_servers"
+  value    = "${var.vmdns}"
+  category = "terraform"
+  hcl = true
   workspace_id = "${tfe_workspace.compute-linux.id}"
 }
 

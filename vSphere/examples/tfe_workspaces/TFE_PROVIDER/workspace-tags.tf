@@ -3,6 +3,7 @@ resource "tfe_workspace" "tags" {
   name              = "Tags"
   organization      = "${var.org}"
   working_directory = "${var.tags_working_directory}"
+  auto_apply        = true
 
   vcs_repo = {
     identifier     = "${var.vcs_repo_identifier}"

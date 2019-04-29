@@ -34,3 +34,22 @@ variable "memory" {}
 variable "disk_size" {}
 variable "vm_count" {}
 variable "guest_id" {}
+
+#NETWORK
+variable "ipv4submask" {
+  description = "ipv4 Subnet mask"
+  default     = 24
+}
+
+variable "ipaddress" {
+  description = "host(VM) IP address in list format, support more than one IP. Should correspond to number of instances"
+  type        = "string"
+}
+
+variable "vmgateway" {
+  description = "VM gateway to set during provisioning"
+}
+
+variable "vmdns" {
+  type = "string"
+}
