@@ -10,12 +10,12 @@ module "vm" {
   dc = "PacketDatacenter"
   ds_cluster = "DatastoreCluster"
   instances = 1
-  ipaddress = "10.100.0.223"
-  ipv4submask = "255.255.255.0"
+  ipaddress = ["10.100.0.223"]
+  ipv4submask = "24"
   is_windows_image = "true"
   ram_size = 8
-  vlan = "vSwitch0"
-  vmdns = "8.8.8.8"
+  vlan = "VM Network"
+  vmdns = ["8.8.8.8"]
   vmfolder = "TopGolf-Demo"
   vmgateway = "10.100.0.1"
   vmname = "Windows-Test"
